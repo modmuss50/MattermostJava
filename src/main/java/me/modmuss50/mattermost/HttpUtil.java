@@ -21,6 +21,10 @@ public class HttpUtil {
 	public static String serverURL;
 
 	public static HttpResponse getResponse(Object jsonBody, String api) throws IOException {
+		return getResponse(jsonBody, api, serverURL);
+	}
+
+	public static HttpResponse getResponse(Object jsonBody, String api, String serverURL) throws IOException {
 		HttpClient httpclient = HttpClients.createDefault();
 		HttpPost httppost = new HttpPost(serverURL + api);
 		if (Mattermost.SESSION_TOKEN != null && !Mattermost.SESSION_TOKEN.isEmpty()) {

@@ -8,5 +8,5 @@ public class Post {
 	public String channel_id;
 	public String message;
 	public String user_id;
-
+	public String sender_name;
 }
