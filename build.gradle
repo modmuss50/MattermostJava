@@ -26,7 +26,7 @@ dependencies {
 
 jar {
 	from {
-		configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
 	}
 }
 
