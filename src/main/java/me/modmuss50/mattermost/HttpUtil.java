@@ -20,11 +20,10 @@ public class HttpUtil {
 
 	public static String serverURL;
 
-
 	public static HttpResponse getResponse(Object jsonBody, String api) throws IOException {
 		HttpClient httpclient = HttpClients.createDefault();
 		HttpPost httppost = new HttpPost(serverURL + api);
-		if(Mattermost.SESSION_TOKEN != null && !Mattermost.SESSION_TOKEN.isEmpty()){
+		if (Mattermost.SESSION_TOKEN != null && !Mattermost.SESSION_TOKEN.isEmpty()) {
 			httppost.addHeader("Authorization", "Bearer " + Mattermost.SESSION_TOKEN);
 		}
 		httppost.setEntity(new ByteArrayEntity(ModelUtil.GSON.toJson(jsonBody).getBytes()));
@@ -42,19 +41,17 @@ public class HttpUtil {
 		return theString;
 	}
 
-	public static Header[] getHeaders(HttpResponse response){
+	public static Header[] getHeaders(HttpResponse response) {
 		return response.getAllHeaders();
 	}
 
-	public static Header getHeader(HttpResponse response, String headerName){
-		for(Header header : getHeaders(response)){
-			if(header.getName().equalsIgnoreCase(headerName)){
+	public static Header getHeader(HttpResponse response, String headerName) {
+		for (Header header : getHeaders(response)) {
+			if (header.getName().equalsIgnoreCase(headerName)) {
 				return header;
 			}
 		}
 		return null;
 	}
-
-
 
 }

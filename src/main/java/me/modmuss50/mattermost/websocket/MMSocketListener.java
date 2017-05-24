@@ -1,6 +1,5 @@
 package me.modmuss50.mattermost.websocket;
 
-
 import com.neovisionaries.ws.client.*;
 
 import java.util.List;

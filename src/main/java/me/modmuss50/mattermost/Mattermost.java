@@ -4,7 +4,6 @@ import com.neovisionaries.ws.client.*;
 import me.modmuss50.mattermost.models.ModelUtil;
 import me.modmuss50.mattermost.models.auth.Login;
 import me.modmuss50.mattermost.models.post.Post;
-import me.modmuss50.mattermost.models.post.PostList;
 import me.modmuss50.mattermost.websocket.AuthChallange;
 import me.modmuss50.mattermost.websocket.MMSocketListener;
 import org.apache.http.HttpResponse;
@@ -30,24 +29,11 @@ public class Mattermost {
 		System.out.println(SESSION_TOKEN);
 	}
 
-
 	public void sendMessage(String message, String channelID) throws IOException {
 		Post post = new Post();
 		post.channel_id = channelID;
 		post.message = message;
 		HttpResponse postResponse = HttpUtil.getResponse(post, "/posts");
-	}
-
-	public PostList getPosts(String channelID) throws IOException {
-		class PostListRequest {
-			String channel_id;
-		}
-		PostListRequest postListRequest = new PostListRequest();
-		postListRequest.channel_id = channelID;
-		HttpResponse postResponse = HttpUtil.getResponse(postListRequest,  "/channels/posts");
-		String jsonRespose = HttpUtil.getContent(postResponse);
-		System.out.println(jsonRespose);
-		return ModelUtil.GSON.fromJson(jsonRespose, PostList.class);
 	}
 
 	public void createMessageHanlder(IMessageHandler messageHandler, boolean skipSSL) throws URISyntaxException, IOException, InterruptedException {
@@ -106,9 +92,5 @@ public class Mattermost {
 		webSocket.sendBinary(ModelUtil.GSON.toJson(authChallange).getBytes());
 
 	}
-
-
-
-
 
 }

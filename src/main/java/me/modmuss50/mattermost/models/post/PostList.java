@@ -11,5 +11,4 @@ public class PostList {
 	public List<String> order;
 	public Map<String, Post> posts;
 
-
 }
