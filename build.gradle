@@ -5,7 +5,7 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.6
 
 version = "0.0.1"
 
@@ -26,7 +26,11 @@ dependencies {
 
 jar {
 	from {
-		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+		configurations.compile.each { dep ->
+			from(project.zipTree(dep)){
+				exclude 'META-INF', 'META-INF/**'
+			}
+		}
 	}
 }
 

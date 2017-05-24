@@ -36,7 +36,7 @@ public class Mattermost {
 		HttpResponse postResponse = HttpUtil.getResponse(post, "/posts");
 	}
 
-	public void createMessageHanlder(IMessageHandler messageHandler, boolean skipSSL) throws URISyntaxException, IOException, InterruptedException {
+	public void createMessageHanlder(final IMessageHandler messageHandler, boolean skipSSL) throws URISyntaxException, IOException, InterruptedException {
 		SocketConnector.SKIP_SSL_CHECK = skipSSL;
 		WebSocket webSocket = new WebSocketFactory().createSocket(HttpUtil.serverURL.replace("https", "wss") + "/users/websocket");
 		webSocket.addListener(new MMSocketListener() {
