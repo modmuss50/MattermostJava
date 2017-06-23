@@ -27,13 +27,7 @@ dependencies {
 }
 
 jar {
-	from {
-		configurations.compile.each { dep ->
-			from(project.zipTree(dep)){
-				exclude 'META-INF', 'META-INF/**'
-			}
-		}
-	}
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 uploadArchives {
